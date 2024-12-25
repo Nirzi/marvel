@@ -25,7 +25,7 @@ print("Фильтрованный словарь по ID:")
 pprint(filtered_dict)
 
 #Создайте множество уникальных значений ключа 'director'
-directors_set = {value['director'] for value in full_dict.values() if 'director' in value}
+directors_set = {value['director'] for value in full_dict.values() if 'director' in value and value['director']}
 
 print()
 print()
@@ -53,7 +53,7 @@ print()
 print("Фильмы, начинающиеся на букву 'Ч':")
 pprint(movies_starting_with_Ч)
 
-# Шаг 7: Сортировка по одному параметру (например, 'year')
+#Сортировка по одному параметру (например, 'year')
 sorted_by_year = dict(sorted(full_dict.items(), key=lambda item: item[1]['year'] if isinstance(item[1]['year'], int) else 0))
 
 # Результат сортировки
@@ -64,3 +64,34 @@ print()
 print()
 print("Словарь, отсортированный по году:")
 pprint(sorted_by_year)
+
+
+#Сортировка по двум параметрам (например, 'stage' и 'year')
+sorted_by_stage_and_year = dict(sorted(
+    full_dict.items(),
+    key=lambda item: (item[1]['stage'], item[1]['year']) if isinstance(item[1]['year'], int) else (item[1]['stage'], 0)
+))
+
+# Результат сортировки
+print()
+print()
+print()
+print()
+print()
+print("Словарь, отсортированный по фазе и году:")
+pprint(sorted_by_stage_and_year)
+
+#Однострочник для фильтрации и сортировки
+filtered_and_sorted = dict(sorted(
+    filter(lambda item: item[1]['title'] and item[1]['title'].startswith('М'), full_dict.items()),
+    key=lambda item: item[1]['year'] if isinstance(item[1]['year'], int) else 0
+))
+
+# Результат однострочника
+print()
+print()
+print()
+print()
+print()
+print("Фильтрованный и отсортированный словарь:")
+pprint(filtered_and_sorted)
